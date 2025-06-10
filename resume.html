@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>السيرة الذاتية - مطور محترف</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .resume-section {
+            padding: 100px 0;
+            background-color: var(--bg-light);
+        }
+        
+        .resume-container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            padding: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .resume-header {
+            text-align: center;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 40px;
+        }
+        
+        .resume-name {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .resume-title {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        .resume-contacts {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .resume-contact-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .resume-contact-item i {
+            margin-left: 8px;
+            color: var(--primary-color);
+        }
+        
+        .resume-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        
+        .resume-block h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-right: 30px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            right: 0;
+            top: 5px;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background-color: var(--border-color);
+            right: 7px;
+            top: 10px;
+        }
+        
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+        
+        .timeline-year {
+            display: inline-block;
+            padding: 5px 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-title {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+        
+        .timeline-org {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .timeline-desc {
+            color: var(--text-light);
+        }
+        
+        .progress-item {
+            margin-bottom: 25px;
+        }
+        
+        .progress-title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+        
+        .progress-value {
+            height: 100%;
+            background-color: var(--primary-color);
+            transition: width 1s ease;
+        }
+        
+        .download-cv {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 992px) {
+            .resume-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .resume-container {
+                padding: 30px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .resume-name {
+                font-size: 2rem;
+            }
+            
+            .resume-title {
+                font-size: 1.2rem;
+            }
+            
+            .resume-contacts {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .resume-container {
+                padding: 20px;
+            }
+        }
+    </style>
+    <style>
+          
+        /* ===== القواعد الأساسية ===== */
+:root {
+    --primary-color: #1a73e8;
+    --secondary-color: #4285f4;
+    --accent-color: #fbbc05;
+    --text-color: #333;
+    --text-light: #666;
+    --bg-color: #fff;
+    --bg-light: #f9f9f9;
+    --bg-dark: #1f2937;
+    --border-color: #ddd;
+    --success-color: #28a745;
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    line-height: 1.6;
+    direction: rtl;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+ul {
+    list-style: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: 2px solid var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--primary-color);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-small {
+    padding: 8px 18px;
+    font-size: 0.85em;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.mt-4 {
+    margin-top: 2rem;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-header h2::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 3px;
+    background-color: var(--primary-color);
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+}
+
+.section-header p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.animated-text {
+    display: inline-block;
+    position: relative;
+}
+
+.highlight {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+/* ===== القائمة العلوية ===== */
+header {
+    background-color: white;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 15px 0;
+    transition: var(--transition);
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+nav ul {
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 30px;
+}
+
+nav ul li:last-child {
+    margin-right: 0;
+}
+
+nav ul li a {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: var(--transition);
+    position: relative;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background-color: var(--primary-color);
+    transition: var(--transition);
+}
+
+nav ul li a:hover, 
+nav ul li a.active {
+    color: var(--primary-color);
+}
+
+nav ul li a:hover::after, 
+nav ul li a.active::after {
+    width: 100%;
+}
+
+.mobile-menu-btn {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+/* ===== قسم البداية ===== */
+.hero {
+    padding: 140px 0 100px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hero-text {
+    flex: 1;
+    padding-left: 50px;
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 30px;
+}
+
+.hero-btns {
+    display: flex;
+}
+
+.hero-btns .btn:first-child {
+    margin-left: 15px;
+}
+
+.hero-image {
+    flex: 1;
+    text-align: center;
+}
+
+.hero-image img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+}
+
+/* ===== قسم المهارات ===== */
+.skills {
+    padding: 100px 0;
+    background-color: var(--bg-light);
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.skill-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+}
+
+.skill-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.html-icon {
+    color: #e44d26;
+}
+
+.css-icon {
+    color: #1572b6;
+}
+
+.js-icon {
+    color: #f7df1e;
+}
+
+.react-icon {
+    color: #61dafb;
+}
+
+.python-icon {
+    color: #3776ab;
+}
+
+.skill-level {
+    margin-top: 15px;
+    background-color: #f0f0f0;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.skill-bar {
+    height: 100%;
+    background-color: var(--primary-color);
+    width: 0;
+    transition: width 1.5s ease-out;
+}
+
+/* ===== قسم الخدمات ===== */
+.services {
+    padding: 100px 0;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.service-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    border-bottom: 3px solid transparent;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.service-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.service-card h3 {
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.service-card p {
+    color: var(--text-light);
+}
+
+/* ===== قسم الاحصائيات ===== */
+.stats {
+    padding: 80px 0;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-item h3 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.stat-item p {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* ===== قسم من أنا ===== */
+.about {
+    padding: 100px 0;
+    background-color: var(--bg-light);
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.about-image {
+    flex: 1;
+}
+
+.about-image img {
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-text p {
+    margin-bottom: 20px;
+    color: var(--text-light);
+}
+
+.about-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.info-item h4 {
+    margin-bottom: 5px;
+    color: var(--primary-color);
+}
+
+/* ===== قسم المشاريع ===== */
+.portfolio-summary {
+    padding: 100px 0;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.portfolio-item {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    height: 250px;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: var(--transition);
+    padding: 20px;
+    text-align: center;
+}
+
+.portfolio-overlay h3 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.portfolio-overlay p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 15px;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.1);
+}
+
+/* ===== قسم الاتصال ===== */
+.contact-summary {
+    padding: 100px 0;
+    background-color: var(--bg-light);
+}
+
+.contact-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.contact-option {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+}
+
+.contact-option:hover {
+    transform: translateY(-5px);
+}
+
+.contact-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.contact-option h3 {
+    margin-bottom: 10px;
+}
+
+.contact-option p {
+    color: var(--text-light);
+}
+
+/* ===== التذييل ===== */
+footer {
+    background-color: var(--bg-dark);
+    color: white;
+    padding: 70px 0 20px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-about p {
+    margin: 15px 0;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.social-links a:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-5px);
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-links ul li a:hover {
+    color: white;
+    padding-right: 5px;
+}
+
+.footer-contact p {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.footer-contact i {
+    margin-left: 10px;
+    color: var(--primary-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ===== التجاوب مع الشاشات المختلفة ===== */
+@media (max-width: 992px) {
+    .hero-text h1 {
+        font-size: 2.5rem;
+    }
+    
+    .about-content {
+        flex-direction: column;
+    }
+    
+    .about-image, .about-text {
+        width: 100%;
+    }
+    
+    .hero-content {
+        flex-direction: column;
+    }
+    
+    .hero-text {
+        order: 2;
+        text-align: center;
+        padding-left: 0;
+        margin-top: 40px;
+    }
+    
+    .hero-image {
+        order: 1;
+    }
+    
+    .hero-btns {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 10px 0;
+    }
+    
+    nav ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: white;
+        flex-direction: column;
+        text-align: center;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    nav ul.active {
+        display: flex;
+    }
+    
+    nav ul li {
+        margin: 0;
+        padding: 15px;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .hero {
+        padding: 120px 0 80px;
+    }
+    
+    .hero-text h1 {
+        font-size: 2rem;
+    }
+    
+    .stats-grid, .services-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-text h1 {
+        font-size: 1.8rem;
+    }
+    
+    .about-info {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .service-card, .skill-card, .portfolio-item, .contact-option {
+        padding: 20px 15px;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== الرسوم المتحركة ===== */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.skill-card, .service-card, .portfolio-item, .contact-option {
+    animation: slideUp 0.6s ease forwards;
+}
+
+@keyframes skillBarAnimation {
+    from {
+        width: 0;
+    }
+    to {
+        width: var(--width);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+
+    </style>
+    
+</head>
+<body>
+    <!-- القائمة العلوية -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>مطور ويب محترف</h1>
+            </div>
+            <nav id="navbar">
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="resume.html" class="active">السيرة الذاتية</a></li>
+                    <li><a href="projects.html">المشاريع</a></li>
+                    <li><a href="learning.html">تعلم البرمجة</a></li>
+                    <li><a href="contact.html">اتصل بي</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- قسم السيرة الذاتية -->
+    <section class="resume-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>السيرة الذاتية</h2>
+                <p>مسيرتي المهنية والتعليمية</p>
+            </div>
+            
+            <div class="resume-container">
+                <div class="resume-header">
+                    <h1 class="resume-name">مطور محترف</h1>
+                    <h2 class="resume-title">مطور ويب كامل المكدس</h2>
+                    <div class="resume-contacts">
+                        <div class="resume-contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>jntalkhldyarb@gmail.com</span>
+                        </div>
+                        <div class="resume-contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>01559107092</span>
+                        </div>
+                        <div class="resume-contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>مصر</span>
+                        </div>
+                        <div class="resume-contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <span>linkedin.com/in/pro-developer</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resume-grid">
+                    <div class="resume-block">
+                        <h3>الخبرة المهنية</h3>
+                        
+                        <div class="timeline-item">
+                            <span class="timeline-year">2022 - الآن</span>
+                            <h4 class="timeline-title">مطور ويب أول</h4>
+                            <p class="timeline-org">شركة تكنولوجيا المستقبل</p>
+                            <p class="timeline-desc">عملت على تطوير واجهات المستخدم باستخدام React وتطوير الخلفية باستخدام Node.js. قمت بتحسين أداء التطبيقات وتنفيذ أفضل ممارسات تطوير الويب الحديثة.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <span class="timeline-year">2020 - 2022</span>
+                            <h4 class="timeline-title">مطور واجهات أمامية</h4>
+                            <p class="timeline-org">شركة التقنيات المتقدمة</p>
+                            <p class="timeline-desc">تطوير واجهات المستخدم باستخدام HTML و CSS و JavaScript بالإضافة إلى مكتبة React. عملت على تحسين تجربة المستخدم وتسريع عمليات تحميل الصفحات.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <span class="timeline-year">2018 - 2020</span>
+                            <h4 class="timeline-title">مطور ويب مبتدئ</h4>
+                            <p class="timeline-org">شركة الإبداع الرقمي</p>
+                            <p class="timeline-desc">المشاركة في تطوير مواقع الويب باستخدام HTML و CSS و JavaScript. التعاون مع فريق المصممين لتنفيذ التصاميم المطلوبة.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="resume-block">
+                        <h3>التعليم والدورات</h3>
+                        
+                        <div class="timeline-item">
+                            <span class="timeline-year">2014 - 2018</span>
+                            <h4 class="timeline-title">بكالوريوس علوم الحاسب</h4>
+                            <p class="timeline-org">جامعة القاهرة</p>
+                            <p class="timeline-desc">تخرجت بتقدير امتياز مع مرتبة الشرف، وتخصصت في تطوير البرمجيات وعلوم البيانات.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <span class="timeline-year">2019</span>
+                            <h4 class="timeline-title">شهادة مطور React المعتمد</h4>
+                            <p class="timeline-org">أكاديمية التطوير المتقدم</p>
+                            <p class="timeline-desc">أكملت تدريبًا مكثفًا في تطوير تطبيقات React وحصلت على شهادة اعتماد في مجال تطوير واجهات المستخدم.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <span class="timeline-year">2020</span>
+                            <h4 class="timeline-title">دورة Python المتقدمة</h4>
+                            <p class="timeline-org">منصة التعلم الإلكتروني العالمية</p>
+                            <p class="timeline-desc">أكملت دورة متقدمة في لغة Python وتطبيقاتها في مجال الويب وعلوم البيانات.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resume-block">
+                    <h3>المهارات التقنية</h3>
+                    
+                    <div class="progress-item">
+                        <div class="progress-title">
+                            <span>HTML5 & CSS3</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-value" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-title">
+                            <span>JavaScript</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-value" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-title">
+                            <span>React</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-value" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-title">
+                            <span>Python</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-value" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-title">
+                            <span>Node.js</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-value" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-title">
+                            <span>SQL & Databases</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-value" style="width: 70%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="download-cv">
+                    <a href="#" class="btn btn-primary">تحميل السيرة الذاتية (PDF)</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>مطور ويب محترف</h3>
+                    <p>مطور ويب مبدع متخصص في تطوير تطبيقات الويب الحديثة.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="resume.html">السيرة الذاتية</a></li>
+                        <li><a href="projects.html">المشاريع</a></li>
+                        <li><a href="learning.html">تعلم البرمجة</a></li>
+                        <li><a href="contact.html">اتصل بي</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>معلومات الاتصال</h3>
+                    <p><i class="fas fa-envelope"></i> jntalkhldyarb@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> 01559107092</p>
+                    <p><i class="fas fa-map-marker-alt"></i> مصر</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2023 جميع الحقوق محفوظة | تم تصميم الموقع بواسطة <span class="highlight">مطور محترف</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script src="script.js"></script>
+</body>
+</html>

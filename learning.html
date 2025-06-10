@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تعلم البرمجة - مطور محترف</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .learning-section {
+            padding: 120px 0 100px;
+            background-color: var(--bg-light);
+        }
+        
+        .learning-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+            border-radius: 50px;
+            background-color: white;
+            box-shadow: var(--card-shadow);
+            padding: 10px;
+        }
+        
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 12px 25px;
+            cursor: pointer;
+            font-weight: 500;
+            border-radius: 40px;
+            transition: var(--transition);
+        }
+        
+        .tab-btn.active, .tab-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .tab-content {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            padding: 40px;
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .learn-card {
+            background-color: var(--bg-light);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        .learn-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .learn-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .learn-card p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        .learn-card ul {
+            margin-bottom: 20px;
+        }
+        
+        .learn-card ul li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-right: 20px;
+        }
+        
+        .learn-card ul li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 0;
+            color: var(--primary-color);
+        }
+        
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .resource-card {
+            background-color: var(--bg-light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .resource-img {
+            height: 180px;
+        }
+        
+        .resource-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .resource-content {
+            padding: 20px;
+        }
+        
+        .resource-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .resource-content p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .accordion-item {
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: var(--bg-light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .accordion-header {
+            padding: 15px 20px;
+            background-color: var(--bg-light);
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .accordion-header:hover {
+            background-color: #eef2f7;
+        }
+        
+        .accordion-icon {
+            transition: var(--transition);
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .accordion-content-inner {
+            padding: 0 20px 20px;
+            color: var(--text-light);
+        }
+        
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+        
+        .accordion-item.active .accordion-content {
+            max-height: 500px; /* تعديل القيمة حسب المحتوى */
+        }
+        
+        @media (max-width: 768px) {
+            .learning-tabs {
+                flex-direction: column;
+                padding: 5px;
+            }
+            
+            .tab-btn {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            
+            .tab-content {
+                padding: 25px;
+            }
+            
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* ===== القواعد الأساسية ===== */
+:root {
+    --primary-color: #1a73e8;
+    --secondary-color: #4285f4;
+    --accent-color: #fbbc05;
+    --text-color: #333;
+    --text-light: #666;
+    --bg-color: #fff;
+    --bg-light: #f9f9f9;
+    --bg-dark: #1f2937;
+    --border-color: #ddd;
+    --success-color: #28a745;
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    line-height: 1.6;
+    direction: rtl;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+ul {
+    list-style: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: 2px solid var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--primary-color);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-small {
+    padding: 8px 18px;
+    font-size: 0.85em;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.mt-4 {
+    margin-top: 2rem;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-header h2::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 3px;
+    background-color: var(--primary-color);
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+}
+
+.section-header p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.animated-text {
+    display: inline-block;
+    position: relative;
+}
+
+.highlight {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+/* ===== القائمة العلوية ===== */
+header {
+    background-color: white;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 15px 0;
+    transition: var(--transition);
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+nav ul {
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 30px;
+}
+
+nav ul li:last-child {
+    margin-right: 0;
+}
+
+nav ul li a {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: var(--transition);
+    position: relative;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background-color: var(--primary-color);
+    transition: var(--transition);
+}
+
+nav ul li a:hover, 
+nav ul li a.active {
+    color: var(--primary-color);
+}
+
+nav ul li a:hover::after, 
+nav ul li a.active::after {
+    width: 100%;
+}
+
+.mobile-menu-btn {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+/* ===== قسم البداية ===== */
+.hero {
+    padding: 140px 0 100px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hero-text {
+    flex: 1;
+    padding-left: 50px;
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 30px;
+}
+
+.hero-btns {
+    display: flex;
+}
+
+.hero-btns .btn:first-child {
+    margin-left: 15px;
+}
+
+.hero-image {
+    flex: 1;
+    text-align: center;
+}
+
+.hero-image img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+}
+
+/* ===== قسم المهارات ===== */
+.skills {
+    padding: 100px 0;
+    background-color: var(--bg-light);
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.skill-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+}
+
+.skill-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.html-icon {
+    color: #e44d26;
+}
+
+.css-icon {
+    color: #1572b6;
+}
+
+.js-icon {
+    color: #f7df1e;
+}
+
+.react-icon {
+    color: #61dafb;
+}
+
+.python-icon {
+    color: #3776ab;
+}
+
+.skill-level {
+    margin-top: 15px;
+    background-color: #f0f0f0;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.skill-bar {
+    height: 100%;
+    background-color: var(--primary-color);
+    width: 0;
+    transition: width 1.5s ease-out;
+}
+
+/* ===== قسم الخدمات ===== */
+.services {
+    padding: 100px 0;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.service-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    border-bottom: 3px solid transparent;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.service-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.service-card h3 {
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.service-card p {
+    color: var(--text-light);
+}
+
+/* ===== قسم الاحصائيات ===== */
+.stats {
+    padding: 80px 0;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-item h3 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.stat-item p {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* ===== قسم من أنا ===== */
+.about {
+    padding: 100px 0;
+    background-color: var(--bg-light);
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.about-image {
+    flex: 1;
+}
+
+.about-image img {
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-text p {
+    margin-bottom: 20px;
+    color: var(--text-light);
+}
+
+.about-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.info-item h4 {
+    margin-bottom: 5px;
+    color: var(--primary-color);
+}
+
+/* ===== قسم المشاريع ===== */
+.portfolio-summary {
+    padding: 100px 0;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.portfolio-item {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    height: 250px;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: var(--transition);
+    padding: 20px;
+    text-align: center;
+}
+
+.portfolio-overlay h3 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.portfolio-overlay p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 15px;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.1);
+}
+
+/* ===== قسم الاتصال ===== */
+.contact-summary {
+    padding: 100px 0;
+    background-color: var(--bg-light);
+}
+
+.contact-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.contact-option {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+}
+
+.contact-option:hover {
+    transform: translateY(-5px);
+}
+
+.contact-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.contact-option h3 {
+    margin-bottom: 10px;
+}
+
+.contact-option p {
+    color: var(--text-light);
+}
+
+/* ===== التذييل ===== */
+footer {
+    background-color: var(--bg-dark);
+    color: white;
+    padding: 70px 0 20px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-about p {
+    margin: 15px 0;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.social-links a:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-5px);
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-links ul li a:hover {
+    color: white;
+    padding-right: 5px;
+}
+
+.footer-contact p {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.footer-contact i {
+    margin-left: 10px;
+    color: var(--primary-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ===== التجاوب مع الشاشات المختلفة ===== */
+@media (max-width: 992px) {
+    .hero-text h1 {
+        font-size: 2.5rem;
+    }
+    
+    .about-content {
+        flex-direction: column;
+    }
+    
+    .about-image, .about-text {
+        width: 100%;
+    }
+    
+    .hero-content {
+        flex-direction: column;
+    }
+    
+    .hero-text {
+        order: 2;
+        text-align: center;
+        padding-left: 0;
+        margin-top: 40px;
+    }
+    
+    .hero-image {
+        order: 1;
+    }
+    
+    .hero-btns {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 10px 0;
+    }
+    
+    nav ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: white;
+        flex-direction: column;
+        text-align: center;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    nav ul.active {
+        display: flex;
+    }
+    
+    nav ul li {
+        margin: 0;
+        padding: 15px;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .hero {
+        padding: 120px 0 80px;
+    }
+    
+    .hero-text h1 {
+        font-size: 2rem;
+    }
+    
+    .stats-grid, .services-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-text h1 {
+        font-size: 1.8rem;
+    }
+    
+    .about-info {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .service-card, .skill-card, .portfolio-item, .contact-option {
+        padding: 20px 15px;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== الرسوم المتحركة ===== */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.skill-card, .service-card, .portfolio-item, .contact-option {
+    animation: slideUp 0.6s ease forwards;
+}
+
+@keyframes skillBarAnimation {
+    from {
+        width: 0;
+    }
+    to {
+        width: var(--width);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+
+    </style>
+</head>
+<body>
+    <!-- القائمة العلوية -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>مطور ويب محترف</h1>
+            </div>
+            <nav id="navbar">
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="resume.html">السيرة الذاتية</a></li>
+                    <li><a href="projects.html">المشاريع</a></li>
+                    <li><a href="learning.html" class="active">تعلم البرمجة</a></li>
+                    <li><a href="contact.html">اتصل بي</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- قسم تعلم البرمجة -->
+    <section class="learning-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>تعلم البرمجة</h2>
+                <p>دليلك الشامل لتعلم البرمجة وتطوير المواقع</p>
+            </div>
+            
+            <div class="learning-tabs">
+                <button class="tab-btn active" data-tab="languages">لغات البرمجة</button>
+                <button class="tab-btn" data-tab="roadmap">خارطة التعلم</button>
+                <button class="tab-btn" data-tab="resources">مصادر التعلم</button>
+                <button class="tab-btn" data-tab="faq">أسئلة شائعة</button>
+            </div>
+            
+            <div class="tab-content active" id="languages">
+                <div class="learn-card">
+                    <h3>HTML - لغة ترميز النص التشعبي</h3>
+                    <p>HTML هي اللغة الأساسية لبناء صفحات الويب. تستخدم لتحديد هيكل المحتوى على صفحات الويب باستخدام العلامات.</p>
+                    <ul>
+                        <li>سهلة التعلم وأساسية لتطوير الويب</li>
+                        <li>توفر هيكل وبنية صفحات الويب</li>
+                        <li>مطلوبة لأي مطور ويب</li>
+                    </ul>
+                    <a href="#" class="btn btn-small btn-primary">ابدأ تعلم HTML</a>
+                </div>
+                
+                <div class="learn-card">
+                    <h3>CSS - أوراق الأنماط المتتالية</h3>
+                    <p>CSS هي لغة تستخدم لوصف مظهر وتنسيق المستندات المكتوبة بلغة HTML، وتتحكم في كيفية عرض عناصر HTML على الشاشة.</p>
+                    <ul>
+                        <li>التحكم في مظهر وتنسيق صفحات الويب</li>
+                        <li>إنشاء تصميمات متجاوبة لجميع أحجام الشاشات</li>
+                        <li>إضافة تأثيرات حركية وانتقالات</li>
+                    </ul>
+                    <a href="#" class="btn btn-small btn-primary">ابدأ تعلم CSS</a>
+                </div>
+                
+                <div class="learn-card">
+                    <h3>JavaScript - لغة برمجة الويب</h3>
+                    <p>JavaScript هي لغة برمجة تمكن المطورين من إنشاء محتوى متغير وديناميكي والتحكم في وسائط متعددة والرسوم المتحركة والتفاعل مع المستخدم.</p>
+                    <ul>
+                        <li>إضافة التفاعلية لصفحات الويب</li>
+                        <li>التعامل مع استجابات المستخدم وأحداث المتصفح</li>
+                        <li>إجراء عمليات على البيانات والتواصل مع الخوادم</li>
+                    </ul>
+                    <a href="#" class="btn btn-small btn-primary">ابدأ تعلم JavaScript</a>
+                </div>
+                
+                <div class="learn-card">
+                    <h3>React - مكتبة واجهة المستخدم</h3>
+                    <p>React هي مكتبة JavaScript مفتوحة المصدر لبناء واجهات المستخدم، وخاصة تطبيقات الصفحة الواحدة حيث تحتاج إلى تحديث البيانات بدون تحديث الصفحة.</p>
+                    <ul>
+                        <li>بناء واجهات مستخدم تفاعلية وسريعة</li>
+                        <li>استخدام مفهوم المكونات لإعادة استخدام الكود</li>
+                        <li>الشعبية الواسعة وفرص العمل الكثيرة</li>
+                    </ul>
+                    <a href="#" class="btn btn-small btn-primary">ابدأ تعلم React</a>
+                </div>
+                
+                <div class="learn-card">
+                    <h3>Python - لغة برمجة متعددة الاستخدامات</h3>
+                    <p>Python هي لغة برمجة عالية المستوى وسهلة التعلم، وتستخدم في العديد من المجالات مثل تطوير الويب، علوم البيانات، الذكاء الاصطناعي، وأتمتة النظام.</p>
+                    <ul>
+                        <li>سهلة التعلم ومناسبة للمبتدئين</li>
+                        <li>تستخدم في مجالات متعددة مثل تطوير الويب وعلوم البيانات</li>
+                        <li>مجتمع كبير ومكتبات متنوعة</li>
+                    </ul>
+                    <a href="#" class="btn btn-small btn-primary">ابدأ تعلم Python</a>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="roadmap">
+                <div class="learn-card">
+                    <h3>خطوات تعلم تطوير الويب من الصفر</h3>
+                    <p>إليك خريطة طريق شاملة لتعلم تطوير الويب من البداية وحتى مستوى متقدم، مقسمة إلى مراحل:</p>
+                    
+                    <h4 style="margin: 20px 0 10px; color: var(--primary-color);">1. أساسيات الويب</h4>
+                    <ul>
+                        <li>تعلم HTML5 وبنية صفحات الويب</li>
+                        <li>تعلم CSS3 للتنسيق والتصميم</li>
+                        <li>أساسيات JavaScript للتفاعل</li>
+                        <li>استجابة المواقع (Responsive Design)</li>
+                    </ul>
+                    
+                    <h4 style="margin: 20px 0 10px; color: var(--primary-color);">2. تطوير الواجهة الأمامية</h4>
+                    <ul>
+                        <li>إتقان JavaScript المتقدمة</li>
+                        <li>تعلم إطار عمل CSS مثل Bootstrap أو Tailwind</li>
+                        <li>تعلم مكتبة/إطار عمل JavaScript مثل React أو Vue</li>
+                        <li>إدارة الحالة (State Management) مثل Redux</li>
+                    </ul>
+                    
+                    <h4 style="margin: 20px 0 10px; color: var(--primary-color);">3. تطوير الخلفية</h4>
+                    <ul>
+                        <li>تعلم لغة برمجة خلفية (Node.js, Python, PHP)</li>
+                        <li>أساسيات قواعد البيانات SQL و NoSQL</li>
+                        <li>تطوير واجهات برمجة التطبيقات (APIs)</li>
+                        <li>أمان الويب والتوثيق</li>
+                    </ul>
+                    
+                    <h4 style="margin: 20px 0 10px; color: var(--primary-color);">4. مهارات متقدمة</h4>
+                    <ul>
+                        <li>اختبار البرمجيات وضمان الجودة</li>
+                        <li>نشر التطبيقات والبنية التحتية</li>
+                        <li>أداء الويب والتحسين</li>
+                        <li>تطوير تطبيقات الويب التقدمية (PWA)</li>
+                    </ul>
+                    
+                    <a href="#" class="btn btn-small btn-primary">تحميل خريطة التعلم كاملة</a>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="resources">
+                <h3 style="margin-bottom: 25px;">أفضل المصادر لتعلم البرمجة</h3>
+                
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-img">
+                            <img src="https://source.unsplash.com/random/600x400/?coding,tutorial" alt="منصة تعليمية">
+                        </div>
+                        <div class="resource-content">
+                            <h3>Codecademy</h3>
+                            <p>منصة تفاعلية لتعلم البرمجة عبر دورات عملية ومشاريع واقعية.</p>
+                            <a href="https://www.codecademy.com/" target="_blank" class="btn btn-small">زيارة الموقع</a>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-img">
+                            <img src="https://source.unsplash.com/random/600x400/?learning,programming" alt="منصة تعليمية">
+                        </div>
+                        <div class="resource-content">
+                            <h3>freeCodeCamp</h3>
+                            <p>منصة مجانية توفر مسارات تعليمية كاملة في تطوير الويب مع شهادات.</p>
+                            <a href="https://www.freecodecamp.org/" target="_blank" class="btn btn-small">زيارة الموقع</a>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-img">
+                            <img src="https://source.unsplash.com/random/600x400/?online,courses" alt="منصة تعليمية">
+                        </div>
+                        <div class="resource-content">
+                            <h3>Udemy</h3>
+                            <p>منصة لدورات فيديو احترافية في مختلف مجالات البرمجة والتطوير.</p>
+                            <a href="https://www.udemy.com/" target="_blank" class="btn btn-small">زيارة الموقع</a>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-img">
+                            <img src="https://source.unsplash.com/random/600x400/?developer,documentation" alt="منصة تعليمية">
+                        </div>
+                        <div class="resource-content">
+                            <h3>MDN Web Docs</h3>
+                            <p>توثيق شامل لتقنيات الويب من HTML و CSS و JavaScript وأكثر.</p>
+                            <a href="https://developer.mozilla.org/" target="_blank" class="btn btn-small">زيارة الموقع</a>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-img">
+                            <img src="https://source.unsplash.com/random/600x400/?youtube,tutorial" alt="منصة تعليمية">
+                        </div>
+                        <div class="resource-content">
+                            <h3>قنوات يوتيوب تعليمية</h3>
+                            <p>قنوات مثل Traversy Media و The Net Ninja توفر شروحات برمجة مجانية.</p>
+                            <a href="https://www.youtube.com/results?search_query=web+development+tutorial" target="_blank" class="btn btn-small">استكشاف القنوات</a>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-img">
+                            <img src="https://source.unsplash.com/random/600x400/?github,code" alt="منصة تعليمية">
+                        </div>
+                        <div class="resource-content">
+                            <h3>GitHub</h3>
+                            <p>منصة تستطيع من خلالها استكشاف مشاريع مفتوحة المصدر والتعلم منها.</p>
+                            <a href="https://github.com/" target="_blank" class="btn btn-small">زيارة الموقع</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="faq">
+                <h3 style="margin-bottom: 25px;">الأسئلة الشائعة حول تعلم البرمجة</h3>
+                
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>كم من الوقت يستغرق تعلم البرمجة؟</span>
+                            <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>مدة تعلم البرمجة تختلف من شخص لآخر بناءً على عدة عوامل:</p>
+                                <ul style="margin-top: 15px;">
+                                    <li>الوقت الذي تخصصه للتعلم يوميًا</li>
+                                    <li>خلفيتك التقنية السابقة</li>
+                                    <li>المجال المحدد الذي تريد التخصص فيه</li>
+                                    <li>مدى صعوبة اللغات والتقنيات التي تتعلمها</li>
+                                </ul>
+                                <p style="margin-top: 15px;">بشكل عام، يمكن أن تبدأ في بناء مشاريع بسيطة بعد 3-6 أشهر من الدراسة المنتظمة، وقد تحتاج من سنة إلى سنتين لتصبح مطورًا محترفًا قادرًا على العمل في مجال تطوير الويب.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>ما هي أفضل لغة برمجة للمبتدئين؟</span>
+                            <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>بعض اللغات الأكثر ملاءمة للمبتدئين:</p>
+                                <ul style="margin-top: 15px;">
+                                    <li><strong>Python:</strong> سهلة القراءة مع بناء جملة واضح، ومناسبة لمجموعة واسعة من التطبيقات.</li>
+                                    <li><strong>JavaScript:</strong> أساسية لتطوير الويب ويمكن رؤية نتائجها مباشرة في المتصفح.</li>
+                                    <li><strong>HTML/CSS:</strong> ليست لغات برمجة بالمعنى الدقيق ولكنها أساسية لتطوير الويب ونقطة انطلاق جيدة.</li>
+                                </ul>
+                                <p style="margin-top: 15px;">اختيار اللغة الأولى يعتمد أيضًا على اهتماماتك وأهدافك المهنية.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>هل يمكنني تعلم البرمجة بدون خلفية تقنية؟</span>
+                            <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>نعم، بالتأكيد! الكثير من المبرمجين الناجحين بدأوا بدون أي خلفية تقنية. المفتاح هو:</p>
+                                <ul style="margin-top: 15px;">
+                                    <li>البدء من الأساسيات والتقدم تدريجيًا</li>
+                                    <li>التعلم العملي من خلال المشاريع الصغيرة</li>
+                                    <li>المثابرة وعدم الاستسلام عند مواجهة التحديات</li>
+                                    <li>الاستفادة من المجتمعات عبر الإنترنت للمساعدة</li>
+                                </ul>
+                                <p style="margin-top: 15px;">التعلم المستمر هو جزء من رحلة البرمجة، حتى بالنسبة للمحترفين ذوي الخبرة.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>هل أحتاج لتعلم الرياضيات لأصبح مبرمجًا؟</span>
+                            <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>يعتمد ذلك على مجال البرمجة الذي تهتم به:</p>
+                                <ul style="margin-top: 15px;">
+                                    <li>لتطوير الويب الأساسي، لا تحتاج إلى مهارات رياضية متقدمة.</li>
+                                    <li>للتخصصات مثل علوم البيانات، الذكاء الاصطناعي، أو تطوير الألعاب، ستكون المهارات الرياضية مفيدة.</li>
+                                </ul>
+                                <p style="margin-top: 15px;">المنطق والتفكير التحليلي هما الأكثر أهمية للنجاح في البرمجة، وليس بالضرورة المهارات الرياضية المتقدمة.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>ما هي أفضل طريقة للتعلم: الدورات عبر الإنترنت أم الكتب أم الدراسة الذاتية؟</span>
+                            <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>لا توجد طريقة "أفضل" تناسب الجميع. المزج بين عدة طرق غالبًا ما يكون الأكثر فعالية:</p>
+                                <ul style="margin-top: 15px;">
+                                    <li><strong>الدورات عبر الإنترنت:</strong> توفر هيكلًا وإرشادًا وعادة ما تتضمن مشاريع عملية.</li>
+                                    <li><strong>الكتب:</strong> تقدم فهمًا أعمق للمفاهيم النظرية.</li>
+                                    <li><strong>الدراسة الذاتية والمشاريع:</strong> تعزز التعلم العملي وبناء الثقة.</li>
+                                    <li><strong>مجتمعات المبرمجين:</strong> توفر الدعم والإجابة على الأسئلة والتوجيه.</li>
+                                </ul>
+                                <p style="margin-top: 15px;">اكتشف أسلوب التعلم الذي يناسبك وكن مرنًا في تكييف استراتيجيات التعلم الخاصة بك.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>مطور ويب محترف</h3>
+                    <p>مطور ويب مبدع متخصص في تطوير تطبيقات الويب الحديثة.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="resume.html">السيرة الذاتية</a></li>
+                        <li><a href="projects.html">المشاريع</a></li>
+                        <li><a href="learning.html">تعلم البرمجة</a></li>
+                        <li><a href="contact.html">اتصل بي</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>معلومات الاتصال</h3>
+                    <p><i class="fas fa-envelope"></i> jntalkhldyarb@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> 01559107092</p>
+                    <p><i class="fas fa-map-marker-alt"></i> مصر</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2023 جميع الحقوق محفوظة | تم تصميم الموقع بواسطة <span class="highlight">مطور محترف</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // تبديل علامات التبويب
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // إزالة الكلاس النشط من جميع الأزرار والمحتويات
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // إضافة الكلاس النشط للزر المحدد والمحتوى المرتبط به
+                    this.classList.add('active');
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // تفعيل الاكورديون
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            
+            accordionItems.forEach(item => {
+                const header = item.querySelector('.accordion-header');
+                
+                header.addEventListener('click', function() {
+                    // تبديل حالة العنصر النشط
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
